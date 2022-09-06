@@ -1,63 +1,76 @@
-// function descuento() {
-//     let descuento = prompt('Tiene codigo de descuento?')
-//         if (descuento == 'si'|| (descuento) == 'SI' || (descuento) =='Si'){
-//             let ingreseCodigo = parseInt(prompt('Ingrese el codigo'))
-//             if (ingreseCodigo = descuento){
-//                 alert('CODIGO ACEPTADO CORRECTAMENTE, 15% DESCUENTO')
-//                 porcentaje = precio / 0.15;
-//                 precio = (precio - porcentaje);
-//             }
-//         else{
-//             alert('codigo incorrecto')
-//         }
-//     }
-//         else if (descuento == 'no'|| (descuento) == 'NO' || (descuento) =='No'){
-//             alert('Opcion Incorrecta.')
-//         } 
-//     }
+//declaracion de variables
 
-//DECLARACION DE VARIABLES VACIAS
-
-let eleccion;
-let precio
+let ingreso
+let costo;
 let producto;
-const descuento = 544312;
+let precioSinDescuento
+let codigoDescuento = 544312; //10%
 
-//CONSTRUCTOR
-class usuario{
-    constructor(producto, precio){
+
+//constructor de objetos.
+class compra {
+    constructor(producto, costo){
         this.producto = producto,
-        this.precio = precio
+        this.costo = costo
     }
 }
 
-for (let i = 0; i < 2; i++){
-    let eleccion = prompt('Ingrese el perfume deseado \n 1- Paco Rabanne-Invictus \n 2- Paco Rabanne-One Millon \n 3- Carolina Herrera-VIP');
-    if (eleccion == 1){
-        precio = '$' + 12500;
-        producto = 'Paco Rabanne-Invictus';
+//array para guardar las compras.
+var arr = []
+
+
+//ciclo repetitivo de preguntas al usuario sobre su compra.
+for (let i = 0; i < 3; i++) {
+    let ingreso = prompt(`Ingresar producto al carrito \n 1- Invictus Pacco Rabanne \n 2- Invitus one millon  \n 3-Carolina Herrera VIP`);
+    if (ingreso == 1){
+        costo = 11200;
+        producto = "Invictus Pacco Rabanne";
         descuento()
-    }
-    else if (eleccion == 2){
-        precio = '$' + 11350;
-        producto = 'Paco Rabanne-Invictus';
+    } else if (ingreso == 2){
+        costo = 12400;
+        producto = "Invitus one millon";
         descuento()
-    }
-    else if (eleccion == 3){
-        precio = '$' + 14200;
-        producto = 'Paco Rabanne-Invictus';
+    } else if (ingreso == 3){
+        producto = "Carolina Herrera VIP";
+        costo = 9800;
         descuento()
+    } else {
+        alert("Opcion incorrecta")
     }
-    else{
-        alert('Su eleccion es incorrecta o no se encuentra en stock, porfavor coloque el numero de las opciones.')
-    }
-    //Push al array (datos)
-        var compra1 = new usuario (producto, precio);
-        datos.push(compra1) 
-        alert(`Su ${compra1.producto} cuesta ${precio}`)
+    //objeto finalizado.
+    var objeto1 = new compra(producto, costo)
+    arr.push(objeto1)
+    alert(`Su ${objeto1.producto} cuesta ${objeto1.costo}`)
 }
 
-//ARRAY PARA GUARDAR LOS DATOS DEL USUARIO CON UN PUSH
-var datos = []
+//alerta de las 3 compras.
+for (let i = 0; i < arr.length; i++){
+    alert(`OBJETO ${i+1} \n PRODUCTO ${arr[i].producto} \n PRECIO ${arr[i].costo}`)
+}
 
 
+//funcion para aplicar 10% de descuento.
+function descuento(){
+    let descuento = prompt("Posee algun descuento?")
+    if (descuento == 'si' || (descuento) == "SI" || (descuento) == "Si"){
+        let ingresoDescuento = parseInt(prompt("Ingrese codigo"))
+        if (ingresoDescuento == codigoDescuento){
+            alert("Su codigo ha sido aceptado! 10%")
+            precioSinDescuento = costo * 0.10;
+            costo = costo - precioSinDescuento;
+            // alert(`El ${producto} cuesta $${costo}`)
+        } else {
+            alert('codigo invalido')
+        }
+    } else if (descuento == 'no' || descuento == "NO" || descuento == "No"){
+        // alert(`El ${producto} cuesta $${costo}`)
+    }
+    else {
+        alert("Opcion incorrecta")
+    }
+}
+
+//precio final de todos los objetos
+
+let precioTotal = arr.reduce((acc, e) => acc + e.costo, 0)
+alert(`El precio final es de su compra es de $${precioTotal}`)
