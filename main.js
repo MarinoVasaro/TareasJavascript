@@ -74,3 +74,24 @@ function descuento(){
 
 let precioTotal = arr.reduce((acc, e) => acc + e.costo, 0)
 alert(`El precio final es de su compra es de $${precioTotal}`)
+
+
+// DOM
+let pagar = document.getElementById("pagar")
+for (const i of arr) {
+    let contenedor = document.createElement("div")
+    contenedor.innerHTML = `<h2>${i.producto}</h2>
+                            <p>${i.costo}</p>`
+    pagar.append(contenedor)
+}
+
+let mensajePrecioTotal = document.createElement("h3")
+mensajePrecioTotal.innerText = `El costo total es de ${precioTotal}`
+pagar.append(mensajePrecioTotal)
+
+// EVENTO SECCION pagar
+let botonPagar = document.getElementById("botonPagar");
+botonPagar.addEventListener("click",clickpagar);
+function clickpagar(){
+    alert("Gracias por su compra de" + " " +precioTotal + "!");
+}
